@@ -23,15 +23,12 @@ def get_all_installed_programs(directory: str) -> list:
     return programs
 
 
-def make_all_programs_list(directory1: str, directory2: str) -> list:
+def all_installed_programs(directory1: str, directory2: str) -> list:
     return get_all_installed_programs(directory1) + get_all_installed_programs(directory2)
 
 
 if __name__ == "__main__":
-    # Obtener la lista de todos los programas instalados
-    all_installed_programs = make_all_programs_list("C:\\Program Files (x86)", "C:\\Program Files")
-    # Imprimimos la información de cada programa
-    for program in all_installed_programs:
+    for program in all_installed_programs("C:\\Program Files (x86)", "C:\\Program Files"):
         head = ("NOMBRE", "RUTA", "TAMAÑO", "FECHA INSTALACIÓN")
         program_list = [[program['name'], program['path'], program['size'], program['created at']]]
         print(tabulate(program_list, headers=head, tablefmt='fancy_grid', stralign='center', floatfmt='.0f'))
