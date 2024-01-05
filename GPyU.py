@@ -49,7 +49,7 @@ def print_system_table() -> None:
     print(tabulate(system_info_list, headers=head, tablefmt='fancy_grid', stralign='center', floatfmt='.0f'))
 
 
-def print_gpu_info() -> None:
+def print_gpu_info_table() -> None:
     print_title('GPU DETAILS')
     gpus = GPUtil.getGPUs()
     list_gpus = []
@@ -122,7 +122,6 @@ def print_ram_table() -> None:
 
 def get_disk_info() -> list:
     partitions = psutil.disk_partitions()
-    # partition_usage = psutil.disk_usage(partition.mountpoint)
     titles = [
         [
             'device: ' + part[1],
@@ -143,6 +142,6 @@ if __name__ == '__main__':
     print_name_ip_table()
     print_system_table()
     print_cores_table()
-    print_gpu_info()
+    print_gpu_info_table()
     print_ram_table()
     print_disk_table()
