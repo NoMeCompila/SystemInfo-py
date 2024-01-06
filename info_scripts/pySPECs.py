@@ -2,8 +2,8 @@ import socket  # libreria para saber nombre del PC
 import platform  # libreria para obtener especificaciones de hardware
 import urllib.request  # libreria para obtener ip publica y privada
 import psutil  # libreria para el manejo de memoria
-from io import open
-
+from io import open # para abrir el archivo
+import os # para manejar archivos y directorios
 
 def pc_name() -> None:
     """
@@ -126,6 +126,21 @@ def execute_all() -> None:
     archivo.close()
 
 
+def direcory_and_file_exists() -> None:
+    directorio = "pySPECs-master"
+    archivo = "info_pc.txt"
+    ruta_completa = os.path.join(directorio, archivo)
+
+    if os.path.exists(ruta_completa):
+        print(f"El archivo '{archivo}' fue creado con exito.")
+    else:
+        print(f"El directorio '{directorio}' y/o el archivo '{archivo}' no existen.")
+
+
 if __name__ == '__main__':
     archivo = open("info_pc.txt", "w")
     execute_all()
+    # directorio_actual = os.path.dirname(os.path.abspath(__file__))
+    # print(f"El directorio actual es: {directorio_actual}")
+
+
