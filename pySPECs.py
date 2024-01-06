@@ -5,33 +5,50 @@ import psutil  # libreria para el manejo de memoria
 from io import open
 
 
-def nombrePC():
-    nombre_PC = socket.gethostname()
-    archivo.write("Nombre de la PC: " + nombre_PC)  # concatenar los archivos con el nombre de la pc
+def pc_name() -> None:
+    """
+    Funcion que devuelve el nombre de la PC
+    :return: str
+    """
+    name = socket.gethostname()
+    archivo.write("Nombre de la PC: " + name)
 
 
-# Funcion para obtener las IP
-def IPpriv():
-    nombre_PC = socket.gethostname()
-    IPpriv = socket.gethostbyname(nombre_PC)
-    archivo.write("IP privada: " + IPpriv)
+def private_ip() -> None:
+    """
+    Funcion que devuelve la IP privada
+    :return: str
+    """
+    name = socket.gethostname()
+    priv_ip = socket.gethostbyname(name)
+    archivo.write("IP privada: " + priv_ip)
 
 
-def IPpub():
+def public_ip() -> None:
+    """
+    Funcion que devuelve la IP publica
+    :return: str
+    """
     ip_externa = urllib.request.urlopen('https://ident.me').read().decode('utf8')
     archivo.write("IP publica: " + ip_externa)
 
 
-# funcion  que devuelve nformacion del sistema
-def sist():
+def os_system() -> None:
+    """
+    Funcion que devuelve informacion del sistema
+    :return: str
+    """
     arqui_sist = platform.architecture()
     archivo.write("Arquitectura y SO: " + str(arqui_sist))
     vers = platform.release()
     archivo.write("\nVersion: " + vers)
 
 
-# Funcion que devuelve informacion sobre el hardware
-def Cores():
+def get_cores() -> None:
+    """
+    Funcion que devuelve informacion sobre el hardware
+    :return: str
+    """
     tipo_mauina = platform.machine()
     archivo.write("Tipo de maquina: " + tipo_mauina)
     procesador = platform.processor()
@@ -41,32 +58,41 @@ def Cores():
     archivo.write("\n" + "cores fisicos: " + str(cores_fisicos) + "\n" + "cores totales: " + str(cores_totales))
 
 
-# funcion de convfersion de unidades de almacenamiento
-"""
-    Reescala los bytes al formato adecuado
-        1253656 => '1.20MB'
-        1253656678 => '1.17GB'
-"""
+def get_size(bytes, sufijo="B") -> str:
+    """
+    Funcion que devuelve el tamaño de la memoria en formato legible
 
+            Reescala los bytes al formato adecuado
+            1253656 => '1.20MB'
+            1253656678 => '1.17GB'
 
-def get_size(bytes, sufijo="B"):
+    :param bytes: tamaño de la memoria
+    :param sufijo: sufijo de la unidad de medida
+    :return: str
+    """
     factor_conversion = 1024
     for unidad in ["", "K", "M", "G", "T", "P"]:
         if bytes < factor_conversion:
-            return f"{bytes:.2f}{unidad}{sufijo}"  # retorna la unidad de medida final redondeada a 2 decimales con su correspondiente abreviatura
+            return f"{bytes:.2f}{unidad}{sufijo}"
         bytes /= factor_conversion
 
 
-def memoriaRAM():
+def ram_memory() -> None:
+    """
+    Funcion que devuelve informacion sobre la memoria RAM
+    :return: str
+    """
     ram = psutil.virtual_memory()
     archivo.write("\nMemoria RAM  total: " + get_size(ram.total))
     archivo.write("\nMemoria RAM usada: " + get_size(ram.used))
     archivo.write("\nMemoria RAM disponible: " + get_size(ram.available))
 
 
-# funcion que devuelve el espacio en disco disponible
-
-def espacioEnDisco():
+def space_in_disc() -> None:
+    """
+    Funcion que devuelve informacion sobre el espacio en disco
+    :return: str
+    """
     partitions = psutil.disk_partitions()
     for partition in partitions:
         archivo.write(f"\n=== Disco Local: {partition.device} ===")
@@ -82,29 +108,24 @@ def espacioEnDisco():
 
 
 # Funcion que une a todas las anteriores y cierra el archivo
-def EjecutarTodo():
+def execute_all() -> None:
     archivo.write("=" * 40 + "Nombre PC" + "=" * 40 + "\n")
-    nombrePC()
+    pc_name()
     archivo.write("\n" + "=" * 40 + "Informacion IP" + "=" * 40 + "\n")
-    IPpriv()
+    private_ip()
     archivo.write("\n")
-    IPpub()
+    public_ip()
     archivo.write("\n" + "=" * 40 + "SISTEMA" + "=" * 40 + "\n")
-    sist()
+    os_system()
     archivo.write("\n" + "=" * 40 + "Hardware" + "=" * 40 + "\n")
-    Cores()
+    get_cores()
     archivo.write("\n" + "=" * 40 + "Memoria RAM" + "=" * 40)
-    memoriaRAM()
+    ram_memory()
     archivo.write("\n" + "=" * 40 + "Memoria en Disco" + "=" * 40)
-    espacioEnDisco()
+    space_in_disc()
     archivo.close()
 
 
 if __name__ == '__main__':
-
-    # abrir el archivo con una variable global
     archivo = open("info_pc.txt", "w")
-
-    EjecutarTodo()
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    execute_all()
