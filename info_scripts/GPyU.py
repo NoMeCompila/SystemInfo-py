@@ -60,10 +60,18 @@ def get_os() -> str:
 
 
 def get_architecture() -> str:
+    """
+    Retorna la arquitectura del sistema operativo
+    :return: str
+    """
     return platform.architecture()[0]
 
 
-def get_system_version():
+def get_system_version() -> str:
+    """
+    Retorna la version del sistema operativo
+    :return: str
+    """
     return platform.release()
 
 
