@@ -4,7 +4,6 @@ import jinja2
 import pdfkit
 import socket
 import psutil
-from tabulate import tabulate
 import GPUtil
 import urllib.request
 import platform
@@ -208,48 +207,38 @@ def fill_info_dict() -> dict:
     Llena un diccionario con la información del sistema
     :return: dict
     """
-    information_dict = {}
-    information_dict['current_date'] = get_current_date()
-    information_dict['current_time'] = get_current_time()
-    information_dict['pc_name'] = get_pc_name()
-    information_dict['private_ip'] = get_private_ip()
-    information_dict['public_ip'] = get_public_ip()
-    information_dict['os'] = get_os()
-    information_dict['system_version'] = get_system_version()
-    information_dict['system_architecture'] = get_architecture()
-    information_dict['cpu'] = get_processor()
-    information_dict['physical_cores'] = get_physical_cores()
-    information_dict['logical_cores'] = get_logical_cores()
-    information_dict['total_ram'] = get_total_ram()
-    information_dict['used_ram'] = get_used_ram()
-    information_dict['free_ram'] = get_free_ram()
-    information_dict['gpu_id'] = get_gpu_id()
-    information_dict['gpu_name'] = get_gpu_name()
-    information_dict['gpu_charge'] = get_gpu_charge()
-    information_dict['gpu_free_memory'] = get_gpu_free_memory()
-    information_dict['gpu_used_memory'] = get_gpu_used_memory()
-    information_dict['gpu_total_memory'] = get_gpu_total_memory()
-    information_dict['gpu_temperature'] = get_gpu_temperature()
+    information_dict = {
+        'current_date': get_current_date(),
+        'current_time': get_current_time(),
+        'pc_name': get_pc_name(),
+        'private_ip': get_private_ip(),
+        'public_ip': get_public_ip(),
+        'os': get_os(),
+        'system_version': get_system_version(),
+        'system_architecture': get_architecture(),
+        'cpu': get_processor(),
+        'physical_cores': get_physical_cores(),
+        'logical_cores': get_logical_cores(),
+        'total_ram': get_total_ram(),
+        'used_ram': get_used_ram(),
+        'free_ram': get_free_ram(),
+        'gpu_id': get_gpu_id(),
+        'gpu_name': get_gpu_name(),
+        'gpu_charge': get_gpu_charge(),
+        'gpu_free_memory': get_gpu_free_memory(),
+        'gpu_used_memory': get_gpu_used_memory(),
+        'gpu_total_memory': get_gpu_total_memory(),
+        'gpu_temperature': get_gpu_temperature()
+    }
+
     return information_dict
 
 
-def make_pdf(html_report_path: str, info: dict, css_path='./style.css') -> None:
+def config_options() -> dict:
     """
-    Crea un pdf a partir de un html
-    :param html_report_path: str
-    :param info: dict
-    :return: None
+    Configuración de opciones para wkhtmltopdf
+    :return: dict
     """
-
-    # Obtén la ruta del directorio del informe HTML
-    html_report_dir = os.path.dirname('.')
-
-    # Carga el contenido del informe HTML usando Jinja2
-    env = jinja2.Environment(loader=jinja2.FileSystemLoader(html_report_dir))
-    template = env.get_template(os.path.basename(html_report_path))
-    html_out = template.render(info)
-
-    # Configuración de opciones para wkhtmltopdf
     options = {
         'page-size': 'Letter',
         'margin-top': '0.75in',
@@ -260,25 +249,76 @@ def make_pdf(html_report_path: str, info: dict, css_path='./style.css') -> None:
         'no-outline': None
     }
 
-    # Configuración de la ubicación de wkhtmltopdf
-    config = pdfkit.configuration(wkhtmltopdf=r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe")
+    return options
+
+
+def config_css() -> str:
+    """
+    Configuración de la ruta del archivo CSS
+    :return: str
+    """
+    return './style.css'
+
+
+def config_pdfkit() -> pdfkit.configuration:
+    """
+    Configuración de la ubicación de wkhtmltopdf
+    :return: pdfkit.configuration
+    """
+    return pdfkit.configuration(wkhtmltopdf=r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe")
+
+
+def report_output_path() -> str:
+    """
+    Configuración de la ruta de salida del PDF
+    :return: str
+    """
+    return os.path.join(os.path.dirname('.'), 'sys_report.pdf')
+
+
+def html_output_path(html_report_path: str, information: dict) -> str:
+    """
+    Configuración de la ruta de salida del HTML
+    :param html_report_path: str
+    :param information: dict
+    :return: str
+    """
+    # Obtén la ruta del directorio del informe HTML
+    html_report_dir = os.path.dirname('.')
+
+    # Carga el contenido del informe HTML usando Jinja2
+    env = jinja2.Environment(loader=jinja2.FileSystemLoader(html_report_dir))
+    template = env.get_template(os.path.basename(html_report_path))
+    return template.render(information)
+
+
+def make_pdf(html_report_path: str, information: dict) -> None:
+    """
+    Crea un pdf a partir de un html
+    :param html_report_path: str
+    :param information: dict
+    :return: None
+    """
 
     # Ruta de salida para el PDF
-    output_path = os.path.join(html_report_dir, 'sys_report.pdf')
+    output_path = report_output_path()
 
     try:
         # Genera el PDF a partir del HTML
-        pdfkit.from_string(html_out, output_path, css=css_path, options=options, configuration=config)
-        print(f"El PDF ha sido generado con éxito: {output_path}")
-    except Exception as e:
-        print(f"Error al generar el PDF: {e}")
+        pdfkit.from_string(
+            html_output_path(html_report_path, information),
+            output_path,
+            css=config_css(),
+            options=config_options(),
+            configuration=config_pdfkit()
+        )
+    except Exception:
+        print(f"Reporte Generado")
 
 
 if __name__ == '__main__':
     report_path = r'C:\Users\FeR\Desktop\AllProjects\pySPECs-master\reports\template.html'
     info = fill_info_dict()
-
-    # Llama a la función make_pdf y maneja cualquier excepción
     try:
         make_pdf(report_path, info)
     except Exception as e:
