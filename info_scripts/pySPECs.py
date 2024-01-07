@@ -2,8 +2,9 @@ import socket  # libreria para saber nombre del PC
 import platform  # libreria para obtener especificaciones de hardware
 import urllib.request  # libreria para obtener ip publica y privada
 import psutil  # libreria para el manejo de memoria
-from io import open # para abrir el archivo
-import os # para manejar archivos y directorios
+from io import open  # para abrir el archivo
+import os  # para manejar archivos y directorios
+
 
 def pc_name() -> None:
     """
@@ -142,5 +143,3 @@ if __name__ == '__main__':
     execute_all()
     # directorio_actual = os.path.dirname(os.path.abspath(__file__))
     # print(f"El directorio actual es: {directorio_actual}")
-
-

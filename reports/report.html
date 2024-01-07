@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informe de Especificaciones de PC</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Informe de Especificaciones de PC</h1>
+
+  <table>
+    <tr>
+      <th colspan="2">Nombre PC</th>
+    </tr>
+    <tr>
+      <td>Nombre de la PC</td>
+      <td>{{pc_name}}</td>
+    </tr>
+  </table>
+
+  <table>
+    <tr>
+      <th colspan="2">Información IP</th>
+    </tr>
+    <tr>
+      <td>IP privada:</td>
+      <td>{{private_ip}}</td>
+    </tr>
+    <tr>
+      <td>IP pública:</td>
+      <td>{{publoc_ip}}</td>
+    </tr>
+  </table>
+
+  <table>
+    <tr>
+      <th colspan="2">SISTEMA</th>
+    </tr>
+    <tr>
+      <td>SO</td>
+      <td>{{system}}</td>
+    </tr>
+    <tr>
+      <td>Versión</td>
+      <td>{{version}}</td>
+    </tr>
+    <tr>
+      <td>Arquitectura</td>
+      <td>{{arch}}</td>
+    </tr>
+  </table>
+
+  <!-- Agrega variables adicionales para Hardware, Memoria RAM, y Memoria en Disco -->
+
+  <table>
+    <tr>
+      <th colspan="2">CPU</th>
+    </tr>
+    <tr>
+      <td>Procesador</td>
+      <td>{{architecture_os}}</td>
+    </tr>
+    <tr>
+      <td>cores físicos:</td>
+      <td>{{phisical_cores}}</td>
+    </tr>
+    <tr>
+      <td>cores lógicos:</td>
+      <td>{logical_cores}}</td>
+    </tr>
+  </table>
+
+  <table>
+    <tr>
+      <th colspan="2">GPU</th>
+    </tr>
+    <tr>
+      <td>ID</td>
+      <td>{{id}}</td>
+    </tr>
+    <tr>
+      <td>nombre</td>
+      <td>{{gpu_name}}</td>
+    </tr>
+    <tr>
+      <td>carga</td>
+      <td>{{charge}}</td>
+    </tr>
+    <tr>
+      <td>memoria libre</td>
+      <td>{{free_gpu_memory}}</td>
+    </tr>
+    <tr>
+      <td>memoria usada</td>
+      <td>{{used_gpu_memory}}</td>
+    </tr>
+    <tr>
+      <td>memoria total</td>
+      <td>{{total_gpu_memory}}</td>
+    </tr>
+    <tr>
+      <td>temperatura</td>
+      <td>{{gpu_temperature}}</td>
+    </tr>
+  </table>
+
+
+  <table>
+    <tr>
+      <th colspan="2">Memoria RAM</th>
+    </tr>
+    <tr>
+      <td>Memoria RAM  total</td>
+      <td>{{total_ram}}</td>
+    </tr>
+    <tr>
+      <td>Memoria RAM usada</td>
+      <td>{{used_ram}}</td>
+    </tr>
+    <tr>
+      <td>Memoria RAM disponible</td>
+      <td>{{free_ram}}</td>
+    </tr>
+  </table>
+
+
+<!--  <table>-->
+<!--    <tr>-->
+<!--      <th colspan="2">Memoria en Disco</th>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <td colspan="2">Disco Local C</td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <td>Memoria en Disco usada</td>-->
+<!--      <td>{{used_ram}}</td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <td>Memoria RAM disponible</td>-->
+<!--      <td>{{free_ram}}</td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <td>Memoria RAM  total</td>-->
+<!--      <td>{{total_ram}}</td>-->
+<!--    </tr>-->
+<!--  </table>-->
+
+</body>
+</html>

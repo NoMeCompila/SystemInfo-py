@@ -21,7 +21,7 @@ def get_current_date() -> str:
 
 def get_all_installed_programs(directory: str) -> list:
     """
-    Retorna una lista de diccionarios con la informacion de los programas instalados
+    Retorna una lista de diccionarios con la informacion de los programas installations
     :param directory:
     :return: list
     """
@@ -58,4 +58,3 @@ if __name__ == "__main__":
         program_list = [[program['name'], program['path'], program['size'], program['created at']]]
         print(tabulate(program_list, headers=head, tablefmt='fancy_grid', stralign='center', floatfmt='.0f'))
         print()
-
