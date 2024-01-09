@@ -1,33 +1,49 @@
-import tkinter as tk
-from tkinter import ttk
+import socket
 
-def resize_panes(event):
-    # Ajusta la proporción de los paneles al cambiar el tamaño de la ventana
-    panedwindow.paneconfig(pane1, width=window.winfo_width() // 3)
-    panedwindow.paneconfig(pane3, width=window.winfo_width() // 3)
+import customtkinter
 
-# Crear una instancia de la clase Tk
-window = tk.Tk()
-window.title("División en 3 Secciones")
+# set appearance mode and default color theme
+customtkinter.set_appearance_mode("System")  # Modes: system (default), light, dark
+customtkinter.set_default_color_theme("blue")  # Themes: blue (default), dark-blue, green
 
-# Crear un objeto PanedWindow
-panedwindow = ttk.Panedwindow(window, orient="horizontal")
+# create CTk window like you do with the Tk window
+app = customtkinter.CTk()
 
-# Crear tres paneles
-pane1 = ttk.Frame(panedwindow, width=window.winfo_width() // 3, relief="sunken")
-pane2 = ttk.Frame(panedwindow, relief="sunken")
-pane3 = ttk.Frame(panedwindow, width=window.winfo_width() // 3, relief="sunken")
 
-# Agregar paneles al PanedWindow
-panedwindow.add(pane1)
-panedwindow.add(pane2)
-panedwindow.add(pane3)
+def button_function():
+    print("button pressed")
 
-# Configurar evento para ajustar la proporción al cambiar el tamaño de la ventana
-window.bind("<Configure>", resize_panes)
+def get_pc_name() -> str:
+    """
+    Retorna el nombre del pc
+    :return: str
+    """
+    return str(socket.gethostname())
 
-# Empacar el PanedWindow en la ventana principal
-panedwindow.pack(expand=True, fill="both")
 
-# Iniciar el bucle principal de Tkinter
-window.mainloop()
+if __name__ == "__main__":
+    # Use CTkButton instead of tkinter Button
+    button = customtkinter.CTkButton(master=app, text="Generar PDF", command=button_function, corner_radius=10,
+                                     border_width=2, height=50, font=("Arial", 20))
+
+    button.place(relx=0.5, rely=0.5, anchor=customtkinter.CENTER)
+
+    # titulo de la ventana
+    app.title("PC-SPECS")
+
+    # tamaño de ventana
+    # arithmetic calculation to always open the windows at the center of the screen
+    screen_width = app.winfo_screenwidth()
+    screen_height = app.winfo_screenheight()
+    windows_width = 700
+    windows_height = 600
+    pos_x = int(screen_width / 2 - windows_width / 2)
+    pos_y = int(screen_height / 2 - windows_height / 2)
+    app.geometry(f"{windows_width}x{windows_height}+{pos_x}+{pos_y}")
+
+    # titulo del programa
+    label = customtkinter.CTkLabel(app, text=f"ESPECIFICACIONES: {get_pc_name()}", text_color="white", font=("Arial", 20))
+
+    label.place(relx=0.5, rely=0.1, anchor=customtkinter.CENTER)
+
+    app.mainloop()
