@@ -4,6 +4,7 @@ from tkinter import Label
 import platform
 import customtkinter
 from customtkinter import CTkLabel
+import psutil
 
 # set appearance mode and default color theme
 customtkinter.set_appearance_mode("System")  # Modes: system (default), light, dark
@@ -79,6 +80,67 @@ def get_architecture() -> str:
     :return: str
     """
     return platform.architecture()[0]
+
+def get_size(num_bytes: float, suffix="B") -> str:
+    """
+    Retorna el tamaño en bytes, kilobytes, megabytes, gigabytes, terabytes y petabytes
+    :param num_bytes: float
+    :param suffix: str
+    :return: str
+    """
+    factor_conversion = 1024
+    for unidad in ["", "K", "M", "G", "T", "P"]:
+        if num_bytes < factor_conversion:
+            return f"{num_bytes:.2f}{unidad}{suffix}"
+        num_bytes /= factor_conversion
+
+
+def get_total_ram() -> str:
+    """
+    Retorna la ram total
+    :return: str
+    """
+    ram = psutil.virtual_memory()
+    return str(get_size(ram.total))
+
+
+def get_used_ram() -> str:
+    """
+    Retorna la ram usada
+    :return: str
+    """
+    ram = psutil.virtual_memory()
+    return str(get_size(ram.used))
+
+
+def get_free_ram() -> str:
+    """
+    Retorna la ram libre
+    :return: str
+    """
+    ram = psutil.virtual_memory()
+    return str(get_size(ram.available))
+
+
+
+# def space_in_disc() -> None:
+#     """
+#     Funcion que devuelve informacion sobre el espacio en disco
+#     :return: str
+#     """
+#
+#     partitions = psutil.disk_partitions()
+#     for partition in partitions:
+#         archivo.write(f"Disco Local: {partition.device}")
+#         archivo.write(f"\nPunto de montaje: {partition.mountpoint}")
+#         archivo.write(f"\nTipo de archivo del sistema: {partition.fstype}")
+#         try:
+#             partition_usage = psutil.disk_usage(partition.mountpoint)
+#         except PermissionError:
+#             continue
+#         archivo.write("\nEspacio total en disco: " + get_size(partition_usage.total))
+#         archivo.write("\nEspacio usado en disco: " + get_size(partition_usage.used))
+#         archivo.write("\nEspacio libre en disco: " + get_size(partition_usage.free))
 
 
 if __name__ == "__main__":
@@ -167,9 +229,81 @@ if __name__ == "__main__":
     os_label.place(relx=0.5, rely=0.2, anchor=customtkinter.CENTER)
 
     # nombre del sistema operativo
-    os_name_label = customtkinter.CTkLabel(master=tabview.tab("Sistema"), text=f"Nombre: {get_public_ip()}",
+    os_name_label = customtkinter.CTkLabel(master=tabview.tab("Sistema"), text=f"Sistema operativo: {get_os()}",
                                              fg_color="#144870", height=60, font=("Arial", 20), corner_radius=10)
     os_name_label.place(relx=0.4, rely=0.5, anchor=customtkinter.CENTER)
+
+    # version del sistema operativo
+    os_version_label = customtkinter.CTkLabel(master=tabview.tab("Sistema"), text=f"Versión: {get_system_version()}",
+                                             fg_color="#144870", height=60, font=("Arial", 20), corner_radius=10)
+    os_version_label.place(relx=0.4, rely=0.7, anchor=customtkinter.CENTER)
+
+    # arquitectura del sistema operativo
+    os_architecture_label = customtkinter.CTkLabel(master=tabview.tab("Sistema"), text=f"Arquitectura: {get_architecture()}",
+                                             fg_color="#144870", height=60, font=("Arial", 20), corner_radius=10)
+    os_architecture_label.place(relx=0.4, rely=0.9, anchor=customtkinter.CENTER)
+
+    # boton que copia el nombre del sistema operativo
+    copy_os_btn = customtkinter.CTkButton(master=tabview.tab("Sistema"), text="Copy",
+                                          command=lambda: copy_text_from_label(os_name_label), corner_radius=10,
+                                          border_width=2, height=50, width=30, font=("Arial", 20))
+    copy_os_btn.place(relx=0.75, rely=0.5, anchor=customtkinter.CENTER)
+
+    # boton que copia la version del sistema operativo
+    copy_os_version_btn = customtkinter.CTkButton(master=tabview.tab("Sistema"), text="Copy",
+                                          command=lambda: copy_text_from_label(os_version_label), corner_radius=10,
+                                          border_width=2, height=50, width=30, font=("Arial", 20))
+    copy_os_version_btn.place(relx=0.75, rely=0.7, anchor=customtkinter.CENTER)
+
+    # boton que copia la arquitectura del sistema operativo
+    copy_os_architecture_btn = customtkinter.CTkButton(master=tabview.tab("Sistema"), text="Copy",
+                                          command=lambda: copy_text_from_label(os_architecture_label), corner_radius=10,
+                                          border_width=2, height=50, width=30, font=("Arial", 20))
+    copy_os_architecture_btn.place(relx=0.75, rely=0.9, anchor=customtkinter.CENTER)
+
+    ####################### RAM #######################
+
+    # ram
+    ram_label = customtkinter.CTkLabel(master=tabview.tab("RAM"), text=f"MEMORIA RAM", fg_color="#144870",
+                                      height=80, font=("Arial", 25), corner_radius=10)
+    ram_label.place(relx=0.5, rely=0.2, anchor=customtkinter.CENTER)
+
+    # ram total
+    ram_total_label = customtkinter.CTkLabel(master=tabview.tab("RAM"), text=f"RAM Total: {get_total_ram()}",
+                                             fg_color="#144870", height=60, font=("Arial", 20), corner_radius=10)
+    ram_total_label.place(relx=0.4, rely=0.5, anchor=customtkinter.CENTER)
+
+    # ram usada
+    ram_used_label = customtkinter.CTkLabel(master=tabview.tab("RAM"), text=f"RAM Usada: {get_used_ram()}",
+                                             fg_color="#144870", height=60, font=("Arial", 20), corner_radius=10)
+    ram_used_label.place(relx=0.4, rely=0.7, anchor=customtkinter.CENTER)
+
+    # ram libre
+    ram_free_label = customtkinter.CTkLabel(master=tabview.tab("RAM"), text=f"RAM Libre: {get_free_ram()}",
+                                             fg_color="#144870", height=60, font=("Arial", 20), corner_radius=10)
+    ram_free_label.place(relx=0.4, rely=0.9, anchor=customtkinter.CENTER)
+
+    # boton que copia la ram total
+    copy_ram_total_btn = customtkinter.CTkButton(master=tabview.tab("RAM"), text="Copy",
+                                          command=lambda: copy_text_from_label(ram_total_label), corner_radius=10,
+                                          border_width=2, height=50, width=30, font=("Arial", 20))
+
+    copy_ram_total_btn.place(relx=0.75, rely=0.5, anchor=customtkinter.CENTER)
+
+    # boton que copia la ram usada
+    copy_ram_used_btn = customtkinter.CTkButton(master=tabview.tab("RAM"), text="Copy",
+                                          command=lambda: copy_text_from_label(ram_used_label), corner_radius=10,
+                                          border_width=2, height=50, width=30, font=("Arial", 20))
+
+    copy_ram_used_btn.place(relx=0.75, rely=0.7, anchor=customtkinter.CENTER)
+
+    # boton que copia la ram libre
+    copy_ram_free_btn = customtkinter.CTkButton(master=tabview.tab("RAM"), text="Copy",
+                                          command=lambda: copy_text_from_label(ram_free_label), corner_radius=10,
+                                          border_width=2, height=50, width=30, font=("Arial", 20))
+
+    copy_ram_free_btn.place(relx=0.75, rely=0.9, anchor=customtkinter.CENTER)
+
 
 
 
