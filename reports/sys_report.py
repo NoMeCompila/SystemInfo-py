@@ -316,6 +316,14 @@ def make_pdf(html_report_path: str, information: dict) -> None:
         print(f"Reporte Generado")
 
 
+def get_os_user() -> str:
+    """
+    Retorna el usuario del sistema operativo
+    :return: str
+    """
+    return str(os.getlogin())
+
+
 if __name__ == '__main__':
     report_path = r'C:\Users\FeR\Desktop\AllProjects\pySPECs-master\reports\template.html'
     info = fill_info_dict()
@@ -323,3 +331,6 @@ if __name__ == '__main__':
         make_pdf(report_path, info)
     except Exception as e:
         print(f"Repoerte generado")
+
+    #print("Reporte generado")
+    print(get_os_user())

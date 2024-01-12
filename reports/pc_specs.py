@@ -32,7 +32,7 @@ def get_current_time() -> str:
 def get_pc_name() -> str:
     """
     Retorna el nombre del pc
-    :return: str
+    :return:
     """
     return str(socket.gethostname())
 
