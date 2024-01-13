@@ -3,8 +3,19 @@ import urllib.request
 from tkinter import Label
 import platform
 import customtkinter
+from GPUtil import GPUtil
 from customtkinter import CTkLabel
 import psutil
+import os
+from datetime import datetime
+import jinja2
+import pdfkit
+import socket
+import psutil
+import GPUtil
+import urllib.request
+import platform
+
 
 # set appearance mode and default color theme
 customtkinter.set_appearance_mode("System")  # Modes: system (default), light, dark
@@ -13,6 +24,20 @@ customtkinter.set_default_color_theme("blue")  # Themes: blue (default), dark-bl
 # create CTk window like you do with the Tk window
 app = customtkinter.CTk()
 
+def get_current_date() -> str:
+    """
+    Retorna la fecha y hora actual
+    :return: str
+    """
+    return str(datetime.now().strftime("%d/%m/%Y"))
+
+
+def get_current_time() -> str:
+    """
+    Retorna la hora actual
+    :return: str
+    """
+    return str(datetime.now().strftime("%H:%M:%S"))
 
 def button_function():
     print("button pressed")
@@ -121,31 +146,235 @@ def get_free_ram() -> str:
     ram = psutil.virtual_memory()
     return str(get_size(ram.available))
 
+def get_processor() -> str:
+    """
+    Retorna el procesador
+    :return: str
+    """
+    return str(platform.processor())
 
 
-# def space_in_disc() -> None:
-#     """
-#     Funcion que devuelve informacion sobre el espacio en disco
-#     :return: str
-#     """
-#
-#     partitions = psutil.disk_partitions()
-#     for partition in partitions:
-#         archivo.write(f"Disco Local: {partition.device}")
-#         archivo.write(f"\nPunto de montaje: {partition.mountpoint}")
-#         archivo.write(f"\nTipo de archivo del sistema: {partition.fstype}")
-#         try:
-#             partition_usage = psutil.disk_usage(partition.mountpoint)
-#         except PermissionError:
-#             continue
-#         archivo.write("\nEspacio total en disco: " + get_size(partition_usage.total))
-#         archivo.write("\nEspacio usado en disco: " + get_size(partition_usage.used))
-#         archivo.write("\nEspacio libre en disco: " + get_size(partition_usage.free))
+def get_physical_cores() -> str:
+    """
+    Retorna los cores fisicos
+    :return: str
+    """
+    return str(psutil.cpu_count(logical=False))
+
+
+def get_logical_cores() -> str:
+    """
+    Retorna los cores lógicos
+    :return: str
+    """
+    return str(psutil.cpu_count(logical=True))
+
+
+
+def get_gpu_id() -> str:
+    """
+    Retorna el id de la gpu
+    :return: str
+    """
+    gpus = GPUtil.getGPUs()
+    return str(gpus[0].id)
+
+
+def get_gpu_name() -> str:
+    """
+    Retorna el nombre de la gpu
+    :return: str
+    """
+    gpus = GPUtil.getGPUs()
+    return str(gpus[0].name)
+
+
+def get_gpu_charge() -> str:
+    """
+    Retorna el porcentaje de uso de la gpu
+    :return: str
+    """
+    gpus = GPUtil.getGPUs()
+    return str(f"{round_to_2_floats(gpus[0].load) * 100}%")
+
+
+def round_to_2_floats(num: float) -> float:
+    """
+    Redondea a 2 decimales
+    :param num: float
+    :return: float
+    """
+    return round(num, 2)
+
+
+def get_gpu_free_memory() -> str:
+    """
+    Retorna la memoria libre de la gpu
+    :return: str
+    """
+    gpus = GPUtil.getGPUs()
+    return str(f"{gpus[0].memoryFree}MB")
+
+
+def get_gpu_used_memory() -> str:
+    """
+    Retorna la memoria usada de la gpu
+    :return: str
+    """
+    gpus = GPUtil.getGPUs()
+    return str(f"{gpus[0].memoryUsed}MB")
+
+
+def get_gpu_total_memory() -> str:
+    """
+    Retorna la memoria total de la gpu
+    :return: str
+    """
+    gpus = GPUtil.getGPUs()
+    return str(f"{gpus[0].memoryTotal}MB")
+
+
+def get_gpu_temperature() -> str:
+    """
+    Retorna la temperatura de la gpu
+    :return: str
+    """
+    gpus = GPUtil.getGPUs()
+    return str(f"{gpus[0].temperature} °C")
+
+
+def fill_info_dict() -> dict:
+    """
+    Llena un diccionario con la información del sistema
+    :return: dict
+    """
+    information_dict = {
+        'current_date': get_current_date(),
+        'current_time': get_current_time(),
+        'pc_name': get_pc_name(),
+        'private_ip': get_private_ip(),
+        'public_ip': get_public_ip(),
+        'os': get_os(),
+        'system_version': get_system_version(),
+        'system_architecture': get_architecture(),
+        'cpu': get_processor(),
+        'physical_cores': get_physical_cores(),
+        'logical_cores': get_logical_cores(),
+        'total_ram': get_total_ram(),
+        'used_ram': get_used_ram(),
+        'free_ram': get_free_ram(),
+        'gpu_id': get_gpu_id(),
+        'gpu_name': get_gpu_name(),
+        'gpu_charge': get_gpu_charge(),
+        'gpu_free_memory': get_gpu_free_memory(),
+        'gpu_used_memory': get_gpu_used_memory(),
+        'gpu_total_memory': get_gpu_total_memory(),
+        'gpu_temperature': get_gpu_temperature()
+    }
+
+    return information_dict
+
+
+def config_options() -> dict:
+    """
+    Configuración de opciones para wkhtmltopdf
+    :return: dict
+    """
+    options = {
+        'page-size': 'Letter',
+        'margin-top': '0.75in',
+        'margin-right': '0.75in',
+        'margin-bottom': '0.50in',
+        'margin-left': '0.75in',
+        'encoding': "UTF-8",
+        'no-outline': None
+    }
+
+    return options
+
+
+def config_css() -> str:
+    """
+    Configuración de la ruta del archivo CSS
+    :return: str
+    """
+    return './style.css'
+
+
+def config_pdfkit() -> pdfkit.configuration:
+    """
+    Configuración de la ubicación de wkhtmltopdf
+    :return: pdfkit.configuration
+    """
+    return pdfkit.configuration(wkhtmltopdf=r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe")
+
+
+def report_output_path() -> str:
+    """
+    Configuración de la ruta de salida del PDF
+    :return: str
+    """
+    return os.path.join(os.path.dirname('.'), 'sys_report.pdf')
+
+
+def html_output_path(html_report_path: str, information: dict) -> str:
+    """
+    Configuración de la ruta de salida del HTML
+    :param html_report_path: str
+    :param information: dict
+    :return: str
+    """
+    # Obtén la ruta del directorio del informe HTML
+    html_report_dir = os.path.dirname('.')
+
+    # Carga el contenido del informe HTML usando Jinja2
+    env = jinja2.Environment(loader=jinja2.FileSystemLoader(html_report_dir))
+    template = env.get_template(os.path.basename(html_report_path))
+    return template.render(information)
+
+
+def make_pdf(html_report_path: str, information: dict) -> None:
+    """
+    Crea un pdf a partir de un html
+    :param html_report_path: str
+    :param information: dict
+    :return: None
+    """
+
+    # Ruta de salida para el PDF
+    output_path = report_output_path()
+
+    try:
+        # Genera el PDF a partir del HTML
+        pdfkit.from_string(
+            html_output_path(html_report_path, information),
+            output_path,
+            css=config_css(),
+            options=config_options(),
+            configuration=config_pdfkit()
+        )
+    except Exception:
+        print(f"Reporte Generado")
+
+
+def execute_pdf():
+    report_path = r'C:\Users\FeR\Desktop\AllProjects\pySPECs-master\PC-Specs\template.html'
+    info = fill_info_dict()
+    try:
+        make_pdf(report_path, info)
+        open_pdf()
+    except Exception:
+        pass
+#        print(f"Repoerte generado")
+
+
+def open_pdf():
+    os.system(r"start C:\Users\FeR\Desktop\AllProjects\pySPECs-master\PC-Specs\sys_report.pdf")
 
 
 if __name__ == "__main__":
     # Use CTkButton instead of tkinter Button
-    button = customtkinter.CTkButton(master=app, text="Generar PDF", command=button_function, corner_radius=10,
+    button = customtkinter.CTkButton(master=app, text="Generar PDF", command=execute_pdf, corner_radius=10,
                                      border_width=2, height=50, font=("Arial", 20))
 
     button.place(relx=0.5, rely=0.9, anchor=customtkinter.CENTER)
@@ -172,8 +401,6 @@ if __name__ == "__main__":
     copy_name_btn = customtkinter.CTkButton(app, text="Copy", command=lambda: copy_text_from_label(pc_name_label))
     copy_name_btn.place(relx=0.5, rely=0.15, anchor=customtkinter.CENTER)
 
-    # frame = customtkinter.CTkFrame(master=app, width=600, height=400,fg_color="#1958AA", corner_radius=10)
-    # frame.place(relx=0.5, rely=0.5, anchor=customtkinter.CENTER)
 
     tabview = customtkinter.CTkTabview(master=app, width=600, height=400, fg_color="#1F6AA5")
     tabview.pack(padx=20, pady=20)
@@ -182,7 +409,7 @@ if __name__ == "__main__":
     tabview.add("IP")
     tabview.add("Sistema")
     tabview.add("RAM")
-    tabview.add("Disco")
+    # tabview.add("Disco")
     tabview.add("CPU")
     tabview.add("GPU")
     tabview.set("IP")  # set currently visible tab
@@ -304,7 +531,73 @@ if __name__ == "__main__":
 
     copy_ram_free_btn.place(relx=0.75, rely=0.9, anchor=customtkinter.CENTER)
 
+    ####################### CPU #######################
+
+    # cpu
+    cpu_label = customtkinter.CTkLabel(master=tabview.tab("CPU"), text=f"INFORMACIÓN DEL CPU", fg_color="#144870",
+                                      height=80, font=("Arial", 25), corner_radius=10)
+    cpu_label.place(relx=0.5, rely=0.17, anchor=customtkinter.CENTER)
+
+    # procesador
+    processor_label = customtkinter.CTkLabel(master=tabview.tab("CPU"), text=f"Procesador: {get_processor()}",
+                                             fg_color="#144870", height=60, font=("Arial", 20), corner_radius=10)
+    processor_label.place(relx=0.5, rely=0.42, anchor=customtkinter.CENTER)
+
+    # cores fisicos
+    physical_cores_label = customtkinter.CTkLabel(master=tabview.tab("CPU"), text=f"Cores físicos: {get_physical_cores()}",
+                                             fg_color="#144870", height=50, font=("Arial", 17), corner_radius=10)
+    physical_cores_label.place(relx=0.5, rely=0.75, anchor=customtkinter.CENTER)
+
+    # cores logicos
+    logical_cores_label = customtkinter.CTkLabel(master=tabview.tab("CPU"), text=f"Cores lógicos: {get_logical_cores()}",
+                                             fg_color="#144870", height=50, font=("Arial", 17), corner_radius=10)
+
+    logical_cores_label.place(relx=0.5, rely=0.93, anchor=customtkinter.CENTER)
+
+    # boton que copia el nombre del procesador
+    copy_processor_btn = customtkinter.CTkButton(master=tabview.tab("CPU"), text="Copy", corner_radius=10, border_width=2,
+                                                 command=lambda: copy_text_from_label(processor_label))
+
+    copy_processor_btn.place(relx=0.5, rely=0.6, anchor=customtkinter.CENTER)
 
 
+    ####################### GPU #######################
+
+    # gpu
+    gpu_label = customtkinter.CTkLabel(master=tabview.tab("GPU"), text=f"INFORMACIÓN DE LA GPU", fg_color="#144870",
+                                       height=70, font=("Arial", 22), corner_radius=10)
+    gpu_label.place(relx=0.5, rely=0.13, anchor=customtkinter.CENTER)
+
+    # nombre de la gpu
+    gpu_name_label = customtkinter.CTkLabel(master=tabview.tab("GPU"), text=f"Nombre: {get_gpu_name()}",
+                                            fg_color="#144870", height=50, font=("Arial", 18), corner_radius=10)
+
+    gpu_name_label.place(relx=0.5, rely=0.33, anchor=customtkinter.CENTER)
+
+    # porcentaje de uso de la gpu
+    gpu_charge_label = customtkinter.CTkLabel(master=tabview.tab("GPU"), text=f"Porcentaje de uso: {get_gpu_charge()}",
+                                              fg_color="#144870", height=50, font=("Arial", 18), corner_radius=10)
+
+    gpu_charge_label.place(relx=0.32, rely=0.5, anchor=customtkinter.CENTER)
+
+    # memoria libre de la gpu
+    gpu_free_memory_label = customtkinter.CTkLabel(master=tabview.tab("GPU"), text=f"Memoria libre: {get_gpu_free_memory()}",
+                                                   fg_color="#144870", height=50, font=("Arial", 18), corner_radius=10)
+
+    gpu_free_memory_label.place(relx=0.71, rely=0.5, anchor=customtkinter.CENTER)
+
+    # # memoria total de la gpu
+    gpu_used_memory_label = customtkinter.CTkLabel(master=tabview.tab("GPU"), text=f"Memoria total: {get_gpu_total_memory()}",
+                                                    fg_color="#144870", height=50, font=("Arial", 18), corner_radius=10)
+
+    gpu_used_memory_label.place(relx=0.35, rely=0.68, anchor=customtkinter.CENTER)
+
+
+    # temperatura de la gpu
+
+    gpu_temperature_label = customtkinter.CTkLabel(master=tabview.tab("GPU"), text=f"Temperatura: {get_gpu_temperature()}",
+                                                    fg_color="#144870", height=50, font=("Arial", 18), corner_radius=10)
+
+    gpu_temperature_label.place(relx=0.72, rely=0.68, anchor=customtkinter.CENTER)
 
     app.mainloop()
