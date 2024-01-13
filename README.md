@@ -38,6 +38,8 @@ Proyecto personal que surge de la necesidad de mejorar mi primer proyecto python
 </table>
 </div>
 
+<img src="https://prnt.sc/8kny1naCrTZs" width="200">
+
 ## Requisitos
 - Python 3.x o superior
 - Conexión a internet
