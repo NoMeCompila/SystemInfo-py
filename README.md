@@ -6,7 +6,6 @@
 </h1>
 
 ## Descripción del proyecto
-
 Proyecto personal que surge de la necesidad de mejorar mi primer proyecto python en el que me vi involucrado de manera profesional, en concreto es una aplicación de escritorio que detalla las especificaciones de la computadora que estamos utilizando, detalla componentes de hardware como memoria RAM, CPU GPU, etc y también detalles del software del sistema operativo, nombre, distribución y versión. Permite copiar estos datos directamente al portapapeles y permite generar un reporte en PDF con los detalles del mismo
 
 ## Lenguajes y librerías utilizadas
@@ -20,13 +19,11 @@ Proyecto personal que surge de la necesidad de mejorar mi primer proyecto python
 - pyinstaller~=6.3.0
 
 ## Requisitos
-
 - Python 3.x o superior
 - Conexión a internet
 - descargar e instalar wkhtmltopdf
 
 ### comandos para instalar las librerias necesarias
-
 - entorno virtual de python
 ```
 pip install pipenv
@@ -60,10 +57,7 @@ pipenv install customtkinter
 pipenv install pyinstaller
 ```
 
-## Tecnologíás
-
-## Info que se puede consultar
-
+## Información que muestra la aplicación
 1) Nombre de la PC
 2) Info sobre IP
 3) Info memoria RAM 
@@ -74,19 +68,13 @@ pipenv install pyinstaller
 8) copiar cualquiuer dato de la aplicación
 
 ## Instrucciones de uso
-
 Abrir el aplicativo y consultar la información que se requiere, para generar el reporte se le da al 
 
 ## Contribuciones
-
 Pueden contactar conmigo directamente en mi correo personal o linkedin, toda mi info de contacto se encuentra en mi github profile, para mejorarlo se necesita actualizar la parte donde se muestra los programas instalados sería un gran aporte añadir un tabview donde se listen todos los programas instalados y añadir un buscador por ejemplo
-## Autor
 
+## Autor
 Fernando Caballero - 2024 - Corrientes - Argentina
 
 ## Licencia
-
 Free Use
-
-
-
