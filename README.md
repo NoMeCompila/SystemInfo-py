@@ -15,13 +15,13 @@ Proyecto personal que surge de la necesidad de mejorar mi primer proyecto python
     <td><img src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/267_Python_logo-512.png" width="200" alt="Python"></td>
     <td><img src="https://repository-images.githubusercontent.com/994551/2ba89c40-184d-45ec-8ffe-f9e155aaf702" alt="Imagen 2" width=200 alt="Jinja"></td>
     <td><img src="https://products.fileformat.com/es/pdf/python/header-image.png" width="200" alt="pdfkkit"></td>
-    <td><img src="https://3.bp.blogspot.com/-k8yq2zNv2M0/Vn26DopMriI/AAAAAAAACoo/bPookqBjUUk/s1600/tkinter1.png" width="200" alt="Tkinter"></td>
+    <td><img src="https://styles.redditmedia.com/t5_8tx64t/styles/communityIcon_kbz7e49k7obb1.png" width="200" alt="CustomTkinter"></td>
   </tr>
   <tr align="center">
     <td>Python 3.11.3</td>
     <td>Jinja2 3.1.2</td>
     <td>pdfkit 1.0.0</td>
-    <td>Tkinter</td>
+    <td>CustomTkinter 5.2.1</td>
   </tr>
 </table>
 </div>
@@ -30,10 +30,10 @@ Proyecto personal que surge de la necesidad de mejorar mi primer proyecto python
 - python 3.11.3
 - Jinja2~=3.1.2
 - pdfkit~=1.0.0
+- customtkinter~=5.2.1
 - psutil~=5.9.4
 - GPUtil~=1.4.0
 - tabulate~=0.9.0
-- customtkinter~=5.2.1
 - pyinstaller~=6.3.0
 
 ## Requisitos
