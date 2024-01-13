@@ -26,8 +26,8 @@ Proyecto personal que surge de la necesidad de mejorar mi primer proyecto python
     <tr>
     <td><img src="https://pythonfix.com/pkg/p/psutil/psutil-banner.webp" width="200" alt="psutil"></td>
     <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfv1-oIdAFO00PlE8QFybpiPEjWIDVQvi9hJS39eaeIHf10ZmVNFku6Gki-_D8R9mLnWo&usqp=CAU" alt="Imagen 2" width=200 alt="Jinja"></td>
-    <td><img src="https://products.fileformat.com/es/pdf/python/header-image.png" width="200" alt="pdfkkit"></td>
-    <td><img src="https://styles.redditmedia.com/t5_8tx64t/styles/communityIcon_kbz7e49k7obb1.png" width="200" alt="CustomTkinter"></td>
+    <td><img src="https://www.packetswitch.co.uk/content/images/size/w300/2023/12/tabulate.png" width="200" alt="pdfkkit"></td>
+    <td><img src="https://avatars.githubusercontent.com/u/1215332?s=280&v=4" width="200" alt="CustomTkinter"></td>
   </tr>
   <tr align="center">
     <td>psutil 5.9.4</td>
