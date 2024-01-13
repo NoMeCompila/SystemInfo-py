@@ -1,7 +1,7 @@
 
 <h1>
 <p align="center">
-  Free Range Testers Academy January Challenge
+  PC=SPECS
 </p>
 </h1>
 
