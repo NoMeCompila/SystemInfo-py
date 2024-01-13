@@ -38,9 +38,6 @@ Proyecto personal que surge de la necesidad de mejorar mi primer proyecto python
 </table>
 </div>
 
-
-
-
 ## Requisitos
 - Python 3.x o superior
 - Conexión a internet
