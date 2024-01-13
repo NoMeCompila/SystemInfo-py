@@ -23,73 +23,70 @@ Proyecto personal que surge de la necesidad de mejorar mi primer poryecto python
 
 - Python 3.x o superior
 - Conexión a internet
-- ~~Cambiar las rutas absolutas (todavia no descubrí como hacer que funcione en pytest con relative paths)~~
-- ya arregle las rutas
+- descargar e instalar wkhtmltopdf
+
 ### comandos para instalar las librerias necesarias
 
 - entorno virtual de python
 ```
 pip install pipenv
 ```
-- selenium
+- Jinja2
 ```
-pipenv install selenium
+pipenv install Jinja2
 ```
-- pytest
+- pdfkit
 ```
-pipenv install pytest
+pipenv install pdfkit
 ```
-- reportes html
+- psutil
 ```
-pipenv install pytest-html
+pipenv install psutil
 ```
-- ejecucion en paralelo
+- GPUtil
 ```
-pipenv install pytest-xdist
+pipenv install GPUtil
+```
+- tabulate
+```
+pipenv install tabulate
+```
+- customtkinter
+```
+pipenv install customtkinter
+```
+- pyinstaller
+```
+pipenv install pyinstaller
 ```
 
-## Conceptos Utilizados
-- POM
-- POO
-- asserts con pytest
-- Data Provider
-- Creación de reportes
-- Ejecucion de tests en paralelo
-- Múltiple Browsers
+## Tecnologíás
 
-## Funcionamiento
+## Info que se puede consultar
 
-1) navega a wikipedia.org y verifica el título correcto
-2) Se situa en la barra de busqueda y escribe el tema a buscar (Selenium, Appium)
-3) Hace click en el boton de la lupa para buscar 
-4) Verifica que el título sea el correspondiente al tema buscado
-5) Vielve al Homepage y verifica el título
+1) Nombre de la PC
+2) Info sobre IP
+3) Info memoria RAM 
+4) Info memoria en disco
+5) GPU
+6) CPU
+7) Generar reporte PDF
+8) copiar cualquiuer dato de la aplicación
 
 ## Instrucciones de uso
 
-Una vez que tenemos todo instalado y configurado podemos setear las opciones de busqueda (archivo data/search_data.json) y también el navegador (archivo Browsers/config.json) 
-simplemente cambiamos el valor de la propiedad browser que por defecto viene con Chrome por las demas que acepta ("Edge", "Headless Chrome", "Firefox").
-para ejecutar la búsqueda en paralelo de las 3 opciones y generar un reporte html ejecutamos el siguiente script en el entorno virtual de la terminal de python:
-
-```
-py.test -m search -n 3 --html=wikireport.html
-```
-luego de la ejecución nos queda el siguiente archivo donde podemos ver los resultados de la ejecución en detalle y de manera fácil
-![image](https://user-images.githubusercontent.com/54701174/221791632-6f9529a7-7818-41ca-b75e-738a83b0a6f9.png)
+Abrir el aplicativo y consultar la información que se requiere, para generar el reporte se le da al 
 
 ## Contribuciones
 
-me pueden contactar por el discord de freerangetester aparezco como Fer Caballero y la foto de nirvana o por linkedin que esta en mi inicio de perfil de github  de perfil, soy Jr TAE y recién estoy aprendiendo, 
-acepto cualquier sugerencia o crítica constructiva que crean necesario hacerme saber, así como también si quieren preguntarme algo que no sepan de python o selenium 
-me pueden contactar  
-
+Pueden contactar conmigo directamente en mi correo personal o linkedin, toda mi info de contacto se encuentra en mi github profile, para mejorarlo se necesita actualizar la parte donde se muetra los programas instalados                                                                                                          
 ## Autor
 
-Fernando Caballero 2023 Corrientes Argentina
+Fernando Caballero 2024 Corrientes - Argentina
 
 ## Licencia
 
-Usenla como quieran no me importa xd
+Free Use
 
 
 
