@@ -9,6 +9,21 @@
 Proyecto personal que surge de la necesidad de mejorar mi primer proyecto python en el que me vi involucrado de manera profesional, en concreto es una aplicación de escritorio que detalla las especificaciones de la computadora que estamos utilizando, detalla componentes de hardware como memoria RAM, CPU GPU, etc y también detalles del software del sistema operativo, nombre, distribución y versión. Permite copiar estos datos directamente al portapapeles y permite generar un reporte en PDF con los detalles del mismo
 
 ## Lenguajes y librerías utilizadas
+
+<div align="center">
+<table>
+  <tr>
+    <td><img src="https://codigofacilito.com/assets/iso-114f4aa86ce46b3c3b2040343eb915624cb2a54be54e1f8a59807ff3c4d1eb4b.png" width="200"></td>
+    <td><img src="https://cdn.popsy.co/images/https%3A%2F%2Fwww.notion.so%2Fimage%2Fhttps%253A%252F%252Fs3-us-west-2.amazonaws.com%252Fsecure.notion-static.com%252F5cfd11db-2611-4d4b-9e8e-18921aa0e0ca%252Flogo_min.png%3Ftable%3Dblock%26id%3D229e25e2-802c-434b-89ee-0f7584dc9e30%26cache%3Dv2?width=1500&optimizer=image" alt="Imagen 2" width=200></td>
+  </tr>
+    <tr align="center">
+    <td>Código Facilito</td>
+    <td>MoureDev</td>
+  </tr>
+</table>
+</div>
+
+
 - python 3.11.3
 - Jinja2~=3.1.2
 - pdfkit~=1.0.0
