@@ -94,7 +94,17 @@ copiar al portapapeles rápidamente usando los botones asignados para cada dato.
 de “Generar PDF” el cual genera un reporte en formato PDF con todas las especificaciones de la computadora en formato 
 tabla de manera detallada.
 
-<img src="images/ram_sc.png" width="200" height="100" alt="psutil"></td>
+* Aplicación
+
+
+<img src="images/ram_sc.png" alt="psutil"></td>
+
+
+* Reporte
+
+
+<img src="images/reporteimg.png" alt="psutil"></td>
+
 
 ## Contribuciones
 Pueden contactar conmigo directamente en mi correo personal o linkedin, toda mi info de contacto se encuentra en mi github profile, para mejorarlo se necesita actualizar la parte donde se muestra los programas instalados sería un gran aporte añadir un tabview donde se listen todos los programas instalados y añadir un buscador por ejemplo
