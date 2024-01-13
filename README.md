@@ -1,21 +1,23 @@
 
 <h1>
 <p align="center">
-  PC=SPECS
+  PC-SPECS
 </p>
 </h1>
 
 ## Descripción del proyecto
 
-Este proyecto surge como primer desafío mensual para la academia de free range testers en el cual el objetivo es ingresar a wikipedia.org y verificar que una busqueda sobre un tema en especifico de los resultados esperados.
+Proyecto personal que surge de la necesidad de mejorar mi primer poryecto python en el que me vi involucrado de manera profesional, en concreto es una aplicación de escritorio que detalla las especificaciones de la computadora que estamos utilizando, detalla componentes de hardware como memoria RAM, CPU GPU, etc y tambien detalles del software del sistema operativo, nombre, distribución y version. Permite copiar estos datos drectamente al portapapeles y permite generar un reporte en PDF con los detalles del mismo
 
 ## Lenguajes y librerías utilizadas
-- python 3.10
-- selenium
-- pytest
-- webdriver-manager
-- pytest-xdist
-- pytest-html
+- python 3.11.3
+- Jinja2~=3.1.2
+- pdfkit~=1.0.0
+- psutil~=5.9.4
+- GPUtil~=1.4.0
+- tabulate~=0.9.0
+- customtkinter~=5.2.1
+- pyinstaller~=6.3.0
 
 ## Requisitos
 
