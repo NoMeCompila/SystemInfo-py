@@ -23,7 +23,7 @@ Proyecto personal que surge de la necesidad de mejorar mi primer proyecto python
 - Conexión a internet
 - descargar e instalar wkhtmltopdf
 
-### comandos para instalar las librerias necesarias
+### Comandos Para Instalar Librerias
 - entorno virtual de python
 ```
 pip install pipenv
@@ -57,7 +57,7 @@ pipenv install customtkinter
 pipenv install pyinstaller
 ```
 
-## Información que muestra la aplicación
+## Información Que Muestra la Aplicación
 1) Nombre de la PC
 2) Info sobre IP
 3) Info memoria RAM 
