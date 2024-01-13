@@ -1,4 +1,4 @@
-
+![image](https://github.com/NoMeCompila/SystemInfo-py/assets/54701174/ea4f9bcd-56db-4426-b698-1f59ca4a1b53)![image](https://github.com/NoMeCompila/SystemInfo-py/assets/54701174/0c10cf3b-c3f0-4d44-bda8-3846503640fb)
 <h1>
 <p align="center">
   PC-SPECS
