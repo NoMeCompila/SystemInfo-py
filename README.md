@@ -30,10 +30,10 @@ Proyecto personal que surge de la necesidad de mejorar mi primer proyecto python
     <td><img src="https://styles.redditmedia.com/t5_8tx64t/styles/communityIcon_kbz7e49k7obb1.png" width="200" alt="CustomTkinter"></td>
   </tr>
   <tr align="center">
-    <td>Python 3.11.3</td>
-    <td>Jinja2 3.1.2</td>
-    <td>pdfkit 1.0.0</td>
-    <td>CustomTkinter 5.2.1</td>
+    <td>psutil 5.9.4</td>
+    <td>GPUtil 1.4.0</td>
+    <td>tabulate 0.9.0</td>
+    <td>pyinstaller 6.3.0</td>
   </tr>
 </table>
 </div>
