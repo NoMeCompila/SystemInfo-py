@@ -97,6 +97,11 @@ tabla de manera detallada.
 * Aplicación
 
 
+<p align="center">
+<img src="images/icon.png" alt="psutil"></td>
+</p>
+
+
 <img src="images/ram_sc.png" alt="psutil"></td>
 
 
