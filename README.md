@@ -38,6 +38,9 @@ Proyecto personal que surge de la necesidad de mejorar mi primer proyecto python
 </table>
 </div>
 
+
+
+
 ## Requisitos
 - Python 3.x o superior
 - Conexión a internet
@@ -85,10 +88,16 @@ pipenv install pyinstaller
 5) GPU
 6) CPU
 7) Generar reporte PDF
-8) copiar cualquiuer dato de la aplicación
+8) Copiar cualquiuer dato de la aplicación
 
 ## Instrucciones de uso
-Abrir el aplicativo y consultar la información que se requiere, para generar el reporte se le da al 
+Esta aplicación de escritorio es un dashboard que imprime en pantalla los datos de especificaciones de la computadora 
+que estemos usando tiene múltiples tabs para dividir por partes la información consultada. Todos los datos se pueden 
+copiar al portapapeles rápidamente usando los botones asignados para cada dato. Por último lo más relevante es el botón 
+de “Generar PDF” el cual genera un reporte en formato PDF con todas las especificaciones de la computadora en formato 
+tabla de manera detallada.
+
+<img src="images/ram_sc.png" width="200" height="100" alt="psutil"></td>
 
 ## Contribuciones
 Pueden contactar conmigo directamente en mi correo personal o linkedin, toda mi info de contacto se encuentra en mi github profile, para mejorarlo se necesita actualizar la parte donde se muestra los programas instalados sería un gran aporte añadir un tabview donde se listen todos los programas instalados y añadir un buscador por ejemplo
