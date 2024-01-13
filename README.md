@@ -79,10 +79,10 @@ Abrir el aplicativo y consultar la información que se requiere, para generar el
 
 ## Contribuciones
 
-Pueden contactar conmigo directamente en mi correo personal o linkedin, toda mi info de contacto se encuentra en mi github profile, para mejorarlo se necesita actualizar la parte donde se muetra los programas instalados                                                                                                          
+Pueden contactar conmigo directamente en mi correo personal o linkedin, toda mi info de contacto se encuentra en mi github profile, para mejorarlo se necesita actualizar la parte donde se muestra los programas instalados sería un gran aporte añadir un tabview donde se listen todos los programas instalados y añadir un buscador por ejemplo
 ## Autor
 
-Fernando Caballero 2024 Corrientes - Argentina
+Fernando Caballero - 2024 - Corrientes - Argentina
 
 ## Licencia
 
