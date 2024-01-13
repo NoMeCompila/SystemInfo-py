@@ -7,7 +7,7 @@
 
 ## Descripción del proyecto
 
-Proyecto personal que surge de la necesidad de mejorar mi primer poryecto python en el que me vi involucrado de manera profesional, en concreto es una aplicación de escritorio que detalla las especificaciones de la computadora que estamos utilizando, detalla componentes de hardware como memoria RAM, CPU GPU, etc y tambien detalles del software del sistema operativo, nombre, distribución y version. Permite copiar estos datos drectamente al portapapeles y permite generar un reporte en PDF con los detalles del mismo
+Proyecto personal que surge de la necesidad de mejorar mi primer proyecto python en el que me vi involucrado de manera profesional, en concreto es una aplicación de escritorio que detalla las especificaciones de la computadora que estamos utilizando, detalla componentes de hardware como memoria RAM, CPU GPU, etc y también detalles del software del sistema operativo, nombre, distribución y versión. Permite copiar estos datos directamente al portapapeles y permite generar un reporte en PDF con los detalles del mismo
 
 ## Lenguajes y librerías utilizadas
 - python 3.11.3
