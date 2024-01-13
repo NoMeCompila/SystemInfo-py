@@ -14,13 +14,13 @@ Proyecto personal que surge de la necesidad de mejorar mi primer proyecto python
 <table>
   <tr>
     <td><img src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/267_Python_logo-512.png" width="200" alt="Python"></td>
-    <td><img src="https://pbs.twimg.com/media/Fn5vzFqWAAsB_VG.png:large" alt="Imagen 2" width=200 alt="OpenAI"></td>
+    <td><img src="https://quintagroup.com/cms/python/images/jinja2.png/@@images/919c2c3d-5b4e-4650-943a-b0df263f851b.png" alt="Imagen 2" width=200 alt="Jinja"></td>
     <td><img src="https://image.pngaaa.com/174/4152174-middle.png" width="200" alt="Pyinstaller"></td>
     <td><img src="https://3.bp.blogspot.com/-k8yq2zNv2M0/Vn26DopMriI/AAAAAAAACoo/bPookqBjUUk/s1600/tkinter1.png" width="200" alt="Tkinter"></td>
   </tr>
   <tr align="center">
-    <td>Python</td>
-    <td>OpenAI</td>
+    <td>Python 3.11.3</td>
+    <td>Jinja2</td>
     <td>Pyinstaller</td>
     <td>Tkinter</td>
   </tr>
