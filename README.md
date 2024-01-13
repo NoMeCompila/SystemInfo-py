@@ -19,8 +19,8 @@ Proyecto personal que surge de la necesidad de mejorar mi primer proyecto python
   </tr>
   <tr align="center">
     <td>Python 3.11.3</td>
-    <td>Jinja2</td>
-    <td>Pyinstaller</td>
+    <td>Jinja2 3.1.2</td>
+    <td>pdfkit 1.0.0</td>
     <td>Tkinter</td>
   </tr>
 </table>
