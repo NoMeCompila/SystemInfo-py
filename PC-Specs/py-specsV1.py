@@ -1,11 +1,7 @@
-import socket
 import urllib.request
-from tkinter import Label
-import platform
 import customtkinter
 from GPUtil import GPUtil
 from customtkinter import CTkLabel
-import psutil
 import os
 from datetime import datetime
 import jinja2
@@ -16,13 +12,13 @@ import GPUtil
 import urllib.request
 import platform
 
-
 # set appearance mode and default color theme
 customtkinter.set_appearance_mode("System")  # Modes: system (default), light, dark
 customtkinter.set_default_color_theme("blue")  # Themes: blue (default), dark-blue, green
 
 # create CTk window like you do with the Tk window
 app = customtkinter.CTk()
+
 
 def get_current_date() -> str:
     """
@@ -38,6 +34,7 @@ def get_current_time() -> str:
     :return: str
     """
     return str(datetime.now().strftime("%H:%M:%S"))
+
 
 def button_function():
     print("button pressed")
@@ -80,9 +77,6 @@ def copy_text_from_label(label: CTkLabel):
     app.update()
 
 
-def button_event():
-    print("button pressed")
-
 def get_os() -> str:
     """
     Retorna el sistema operativo
@@ -105,6 +99,7 @@ def get_architecture() -> str:
     :return: str
     """
     return platform.architecture()[0]
+
 
 def get_size(num_bytes: float, suffix="B") -> str:
     """
@@ -146,6 +141,7 @@ def get_free_ram() -> str:
     ram = psutil.virtual_memory()
     return str(get_size(ram.available))
 
+
 def get_processor() -> str:
     """
     Retorna el procesador
@@ -168,7 +164,6 @@ def get_logical_cores() -> str:
     :return: str
     """
     return str(psutil.cpu_count(logical=True))
-
 
 
 def get_gpu_id() -> str:
@@ -394,13 +389,12 @@ if __name__ == "__main__":
 
     # titulo del programa
     pc_name_label = customtkinter.CTkLabel(app, text=f"ESPECIFICACIONES: {get_pc_name()}", text_color="white",
-                                   font=("Arial", 20))
+                                           font=("Arial", 20))
     pc_name_label.place(relx=0.5, rely=0.1, anchor=customtkinter.CENTER)
 
     # Botón que copia el nombre de la PC
     copy_name_btn = customtkinter.CTkButton(app, text="Copy", command=lambda: copy_text_from_label(pc_name_label))
     copy_name_btn.place(relx=0.5, rely=0.15, anchor=customtkinter.CENTER)
-
 
     tabview = customtkinter.CTkTabview(master=app, width=600, height=400, fg_color="#1F6AA5")
     tabview.pack(padx=20, pady=20)
@@ -414,7 +408,7 @@ if __name__ == "__main__":
     tabview.add("GPU")
     tabview.set("IP")  # set currently visible tab
 
-    ####################### IP INFO #######################
+    # ###################### IP INFO #######################
 
     # ip publica y privada
     ip_label = customtkinter.CTkLabel(master=tabview.tab("IP"), text=f"INFORMACIÓN DE LA IP", fg_color="#144870",
@@ -439,17 +433,16 @@ if __name__ == "__main__":
     private_ip_label.place(relx=0.4, rely=0.7, anchor=customtkinter.CENTER)
 
     copy_pub_ip_btn = customtkinter.CTkButton(master=tabview.tab("IP"), text="Copy",
-                                          command=lambda: copy_text_from_label(public_ip_label), corner_radius=10,
-                                          border_width=2, height=50, width=30, font=("Arial", 20))
+                                              command=lambda: copy_text_from_label(public_ip_label), corner_radius=10,
+                                              border_width=2, height=50, width=30, font=("Arial", 20))
 
     copy_priv_ip_btn = customtkinter.CTkButton(master=tabview.tab("IP"), text="Copy",
-                                              command=lambda: copy_text_from_label(private_ip_label), corner_radius=10,
-                                              border_width=2, height=50, width=30, font=("Arial", 20))
+                                               command=lambda: copy_text_from_label(private_ip_label), corner_radius=10,
+                                               border_width=2, height=50, width=30, font=("Arial", 20))
 
     copy_priv_ip_btn.place(relx=0.7, rely=0.7, anchor=customtkinter.CENTER)
 
-
-    ####################### SISTEMA OPERATIVO #######################
+    # ###################### SISTEMA OPERATIVO #######################
     # sistema operativo
     os_label = customtkinter.CTkLabel(master=tabview.tab("Sistema"), text=f"SISTEMA OPERATIVO", fg_color="#144870",
                                       height=80, font=("Arial", 25), corner_radius=10)
@@ -457,42 +450,45 @@ if __name__ == "__main__":
 
     # nombre del sistema operativo
     os_name_label = customtkinter.CTkLabel(master=tabview.tab("Sistema"), text=f"Sistema operativo: {get_os()}",
-                                             fg_color="#144870", height=60, font=("Arial", 20), corner_radius=10)
+                                           fg_color="#144870", height=60, font=("Arial", 20), corner_radius=10)
     os_name_label.place(relx=0.4, rely=0.5, anchor=customtkinter.CENTER)
 
     # version del sistema operativo
     os_version_label = customtkinter.CTkLabel(master=tabview.tab("Sistema"), text=f"Versión: {get_system_version()}",
-                                             fg_color="#144870", height=60, font=("Arial", 20), corner_radius=10)
+                                              fg_color="#144870", height=60, font=("Arial", 20), corner_radius=10)
     os_version_label.place(relx=0.4, rely=0.7, anchor=customtkinter.CENTER)
 
     # arquitectura del sistema operativo
-    os_architecture_label = customtkinter.CTkLabel(master=tabview.tab("Sistema"), text=f"Arquitectura: {get_architecture()}",
-                                             fg_color="#144870", height=60, font=("Arial", 20), corner_radius=10)
+    os_architecture_label = customtkinter.CTkLabel(master=tabview.tab("Sistema"),
+                                                   text=f"Arquitectura: {get_architecture()}",
+                                                   fg_color="#144870", height=60, font=("Arial", 20), corner_radius=10)
     os_architecture_label.place(relx=0.4, rely=0.9, anchor=customtkinter.CENTER)
 
-    # boton que copia el nombre del sistema operativo
+    # botón que copia el nombre del sistema operativo
     copy_os_btn = customtkinter.CTkButton(master=tabview.tab("Sistema"), text="Copy",
                                           command=lambda: copy_text_from_label(os_name_label), corner_radius=10,
                                           border_width=2, height=50, width=30, font=("Arial", 20))
     copy_os_btn.place(relx=0.75, rely=0.5, anchor=customtkinter.CENTER)
 
-    # boton que copia la version del sistema operativo
+    # botón que copia la version del sistema operativo
     copy_os_version_btn = customtkinter.CTkButton(master=tabview.tab("Sistema"), text="Copy",
-                                          command=lambda: copy_text_from_label(os_version_label), corner_radius=10,
-                                          border_width=2, height=50, width=30, font=("Arial", 20))
+                                                  command=lambda: copy_text_from_label(os_version_label),
+                                                  corner_radius=10, border_width=2, height=50,
+                                                  width=30, font=("Arial", 20))
     copy_os_version_btn.place(relx=0.75, rely=0.7, anchor=customtkinter.CENTER)
 
-    # boton que copia la arquitectura del sistema operativo
+    # botón que copia la arquitectura del sistema operativo
     copy_os_architecture_btn = customtkinter.CTkButton(master=tabview.tab("Sistema"), text="Copy",
-                                          command=lambda: copy_text_from_label(os_architecture_label), corner_radius=10,
-                                          border_width=2, height=50, width=30, font=("Arial", 20))
+                                                       command=lambda: copy_text_from_label(os_architecture_label),
+                                                       corner_radius=10, border_width=2, height=50,
+                                                       width=30, font=("Arial", 20))
     copy_os_architecture_btn.place(relx=0.75, rely=0.9, anchor=customtkinter.CENTER)
 
-    ####################### RAM #######################
+    # ###################### RAM #######################
 
     # ram
     ram_label = customtkinter.CTkLabel(master=tabview.tab("RAM"), text=f"MEMORIA RAM", fg_color="#144870",
-                                      height=80, font=("Arial", 25), corner_radius=10)
+                                       height=80, font=("Arial", 25), corner_radius=10)
     ram_label.place(relx=0.5, rely=0.2, anchor=customtkinter.CENTER)
 
     # ram total
@@ -502,40 +498,41 @@ if __name__ == "__main__":
 
     # ram usada
     ram_used_label = customtkinter.CTkLabel(master=tabview.tab("RAM"), text=f"RAM Usada: {get_used_ram()}",
-                                             fg_color="#144870", height=60, font=("Arial", 20), corner_radius=10)
+                                            fg_color="#144870", height=60, font=("Arial", 20), corner_radius=10)
     ram_used_label.place(relx=0.4, rely=0.7, anchor=customtkinter.CENTER)
 
     # ram libre
     ram_free_label = customtkinter.CTkLabel(master=tabview.tab("RAM"), text=f"RAM Libre: {get_free_ram()}",
-                                             fg_color="#144870", height=60, font=("Arial", 20), corner_radius=10)
+                                            fg_color="#144870", height=60, font=("Arial", 20), corner_radius=10)
     ram_free_label.place(relx=0.4, rely=0.9, anchor=customtkinter.CENTER)
 
-    # boton que copia la ram total
+    # botón que copia la ram total
     copy_ram_total_btn = customtkinter.CTkButton(master=tabview.tab("RAM"), text="Copy",
-                                          command=lambda: copy_text_from_label(ram_total_label), corner_radius=10,
-                                          border_width=2, height=50, width=30, font=("Arial", 20))
+                                                 command=lambda: copy_text_from_label(ram_total_label),
+                                                 corner_radius=10, border_width=2, height=50, width=30,
+                                                 font=("Arial", 20))
 
     copy_ram_total_btn.place(relx=0.75, rely=0.5, anchor=customtkinter.CENTER)
 
-    # boton que copia la ram usada
+    # botón que copia la ram usada
     copy_ram_used_btn = customtkinter.CTkButton(master=tabview.tab("RAM"), text="Copy",
-                                          command=lambda: copy_text_from_label(ram_used_label), corner_radius=10,
-                                          border_width=2, height=50, width=30, font=("Arial", 20))
+                                                command=lambda: copy_text_from_label(ram_used_label), corner_radius=10,
+                                                border_width=2, height=50, width=30, font=("Arial", 20))
 
     copy_ram_used_btn.place(relx=0.75, rely=0.7, anchor=customtkinter.CENTER)
 
-    # boton que copia la ram libre
+    # botón que copia la ram libre
     copy_ram_free_btn = customtkinter.CTkButton(master=tabview.tab("RAM"), text="Copy",
-                                          command=lambda: copy_text_from_label(ram_free_label), corner_radius=10,
-                                          border_width=2, height=50, width=30, font=("Arial", 20))
+                                                command=lambda: copy_text_from_label(ram_free_label), corner_radius=10,
+                                                border_width=2, height=50, width=30, font=("Arial", 20))
 
     copy_ram_free_btn.place(relx=0.75, rely=0.9, anchor=customtkinter.CENTER)
 
-    ####################### CPU #######################
+    # ###################### CPU #######################
 
     # cpu
     cpu_label = customtkinter.CTkLabel(master=tabview.tab("CPU"), text=f"INFORMACIÓN DEL CPU", fg_color="#144870",
-                                      height=80, font=("Arial", 25), corner_radius=10)
+                                       height=80, font=("Arial", 25), corner_radius=10)
     cpu_label.place(relx=0.5, rely=0.17, anchor=customtkinter.CENTER)
 
     # procesador
@@ -544,24 +541,26 @@ if __name__ == "__main__":
     processor_label.place(relx=0.5, rely=0.42, anchor=customtkinter.CENTER)
 
     # cores fisicos
-    physical_cores_label = customtkinter.CTkLabel(master=tabview.tab("CPU"), text=f"Cores físicos: {get_physical_cores()}",
-                                             fg_color="#144870", height=50, font=("Arial", 17), corner_radius=10)
+    physical_cores_label = customtkinter.CTkLabel(master=tabview.tab("CPU"),
+                                                  text=f"Cores físicos: {get_physical_cores()}",
+                                                  fg_color="#144870", height=50, font=("Arial", 17), corner_radius=10)
     physical_cores_label.place(relx=0.5, rely=0.75, anchor=customtkinter.CENTER)
 
-    # cores logicos
-    logical_cores_label = customtkinter.CTkLabel(master=tabview.tab("CPU"), text=f"Cores lógicos: {get_logical_cores()}",
-                                             fg_color="#144870", height=50, font=("Arial", 17), corner_radius=10)
+    # cores lógicos
+    logical_cores_label = customtkinter.CTkLabel(master=tabview.tab("CPU"),
+                                                 text=f"Cores lógicos: {get_logical_cores()}",
+                                                 fg_color="#144870", height=50, font=("Arial", 17), corner_radius=10)
 
     logical_cores_label.place(relx=0.5, rely=0.93, anchor=customtkinter.CENTER)
 
-    # boton que copia el nombre del procesador
-    copy_processor_btn = customtkinter.CTkButton(master=tabview.tab("CPU"), text="Copy", corner_radius=10, border_width=2,
+    # botón que copia el nombre del procesador
+    copy_processor_btn = customtkinter.CTkButton(master=tabview.tab("CPU"), text="Copy",
+                                                 corner_radius=10, border_width=2,
                                                  command=lambda: copy_text_from_label(processor_label))
 
     copy_processor_btn.place(relx=0.5, rely=0.6, anchor=customtkinter.CENTER)
 
-
-    ####################### GPU #######################
+    # ###################### GPU #######################
 
     # gpu
     gpu_label = customtkinter.CTkLabel(master=tabview.tab("GPU"), text=f"INFORMACIÓN DE LA GPU", fg_color="#144870",
@@ -581,22 +580,24 @@ if __name__ == "__main__":
     gpu_charge_label.place(relx=0.32, rely=0.5, anchor=customtkinter.CENTER)
 
     # memoria libre de la gpu
-    gpu_free_memory_label = customtkinter.CTkLabel(master=tabview.tab("GPU"), text=f"Memoria libre: {get_gpu_free_memory()}",
+    gpu_free_memory_label = customtkinter.CTkLabel(master=tabview.tab("GPU"),
+                                                   text=f"Memoria libre: {get_gpu_free_memory()}",
                                                    fg_color="#144870", height=50, font=("Arial", 18), corner_radius=10)
 
     gpu_free_memory_label.place(relx=0.71, rely=0.5, anchor=customtkinter.CENTER)
 
-    # # memoria total de la gpu
-    gpu_used_memory_label = customtkinter.CTkLabel(master=tabview.tab("GPU"), text=f"Memoria total: {get_gpu_total_memory()}",
-                                                    fg_color="#144870", height=50, font=("Arial", 18), corner_radius=10)
+    # memoria total de la gpu
+    gpu_used_memory_label = customtkinter.CTkLabel(master=tabview.tab("GPU"),
+                                                   text=f"Memoria total: {get_gpu_total_memory()}",
+                                                   fg_color="#144870", height=50, font=("Arial", 18), corner_radius=10)
 
     gpu_used_memory_label.place(relx=0.35, rely=0.68, anchor=customtkinter.CENTER)
 
-
     # temperatura de la gpu
 
-    gpu_temperature_label = customtkinter.CTkLabel(master=tabview.tab("GPU"), text=f"Temperatura: {get_gpu_temperature()}",
-                                                    fg_color="#144870", height=50, font=("Arial", 18), corner_radius=10)
+    gpu_temperature_label = customtkinter.CTkLabel(master=tabview.tab("GPU"),
+                                                   text=f"Temperatura: {get_gpu_temperature()}", fg_color="#144870",
+                                                   height=50, font=("Arial", 18), corner_radius=10)
 
     gpu_temperature_label.place(relx=0.72, rely=0.68, anchor=customtkinter.CENTER)
 
