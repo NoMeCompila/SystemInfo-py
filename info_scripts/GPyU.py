@@ -2,8 +2,12 @@ import psutil
 from tabulate import tabulate
 import GPUtil
 import socket
-import urllib.request
-import platform
+
+from SpecClass.CpuClass import CpuClass
+from SpecClass.GpuClass import GpuClass
+from SpecClass.IpClass import IpClass
+from SpecClass.RamClass import RamClass
+from SpecClass.SystemClass import SystemClass
 
 
 def print_title(title: str) -> None:
@@ -23,132 +27,50 @@ def get_pc_name() -> str:
     return str(socket.gethostname())
 
 
-def get_private_ip() -> str:
-    """
-    Retorna la ip privada del pc
-    :return: str
-    """
-    pc_name = socket.gethostname()
-    return str(socket.gethostbyname(pc_name))
-
-
-def get_public_ip() -> str:
-    """
-    Retorna la ip publica del pc
-    :return: str
-    """
-    return str(urllib.request.urlopen('https://ident.me').read().decode('utf8'))
-
-
-def print_name_ip_table() -> None:
+def print_ip_info() -> None:
     """
     Imprime una tabla con el nombre del pc, la ip privada y la ip publica
     :return: None
     """
-    print_title('IP INFO')
-    ip_info_list = [[get_pc_name(), get_private_ip(), get_public_ip()]]
-    head = ('Nombre PC', 'IP privada', 'IP Publica')
-    print(tabulate(ip_info_list, headers=head, tablefmt='fancy_grid', stralign='center', floatfmt='.0f'))
+    ip = IpClass()
+    ip.print_ip_table()
 
 
-def get_os() -> str:
-    """
-    Retorna el sistema operativo
-    :return: str
-    """
-    return platform.architecture()[1]
-
-
-def get_architecture() -> str:
-    """
-    Retorna la arquitectura del sistema operativo
-    :return: str
-    """
-    return platform.architecture()[0]
-
-
-def get_system_version() -> str:
-    """
-    Retorna la version del sistema operativo
-    :return: str
-    """
-    return platform.release()
-
-
-def print_system_table() -> None:
+def print_system_info() -> None:
     """
     Imprime una tabla con el sistema operativo, la arquitectura y la version
     :return: None
     """
-    print_title('SYSTEM INFO')
-    system_info_list = [[get_os(), get_architecture(), get_system_version()]]
-    head = ('OS', 'Architecture', 'Version')
-    print(tabulate(system_info_list, headers=head, tablefmt='fancy_grid', stralign='center', floatfmt='.0f'))
+    system = SystemClass()
+    system.print_system_table()
 
 
-def print_gpu_info_table() -> None:
+def print_cpu_info() -> None:
+    """
+    Imprime una tabla con la información de  Tipo de Máquina, Procesador, Cores físicos y los Cores Lógicos
+    :return: None
+    """
+    cpu = CpuClass()
+    cpu.print_cores_table()
+
+
+def print_ram_info() -> None:
+    """
+    Imprime una tabla con la información de la ram
+    :return: None
+    """
+    ram = RamClass()
+    ram.print_ram_table()
+
+
+def print_gpu_info() -> None:
     """
     Imprime una tabla con la informacion de la gpu
     :return: None
     """
-    print_title('GPU DETAILS')
-    gpus = GPUtil.getGPUs()
-    list_gpus = []
-    for gpu in gpus:
-        gpu_id = gpu.id
-        gpu_name = gpu.name
-        gpu_load = f"{round(gpu.load * 100, 2)}%"
-        gpu_free_memory = f"{gpu.memoryFree}MB"
-        gpu_used_memory = f"{gpu.memoryUsed}MB"
-        gpu_total_memory = f"{gpu.memoryTotal}MB"
-        gpu_temperature = f"{gpu.temperature} °C"
-        list_gpus.append([gpu_id, gpu_name, gpu_load, gpu_free_memory, gpu_used_memory, gpu_total_memory,
-                          gpu_temperature])
-    head = ("id", "nombre", "carga", "memoria libre", "memoria usada", "memoria total", "temperatura")
-    print(tabulate(list_gpus, headers=head, tablefmt='fancy_grid', stralign='center', floatfmt='.0f'))
 
-
-def get_machine_type() -> str:
-    """
-    Retorna el tipo de maquina
-    :return: str
-    """
-    return str(platform.machine())
-
-
-def get_processor() -> str:
-    """
-    Retorna el procesador
-    :return: str
-    """
-    return str(platform.processor())
-
-
-def get_physical_cores() -> str:
-    """
-    Retorna los cores fisicos
-    :return: str
-    """
-    return str(psutil.cpu_count(logical=False))
-
-
-def get_logical_cores() -> str:
-    """
-    Retorna los cores lógicos
-    :return: str
-    """
-    return str(psutil.cpu_count(logical=True))
-
-
-def print_cores_table() -> None:
-    """
-    Imprime una tabla con la información de los cores
-    :return: None
-    """
-    print_title('CORES')
-    cores_list = [[get_processor(), get_physical_cores(), get_logical_cores()]]
-    head = ('Procesador', 'Cores Físiscos', 'Cores Lógicos')
-    print(tabulate(cores_list, headers=head, tablefmt='fancy_grid', stralign='center', floatfmt='.0f'))
+    gpu = GpuClass(GPUtil.getGPUs())
+    gpu.print_gpu_info_table()
 
 
 def get_size(num_bytes: float, suffix="B") -> str:
@@ -163,44 +85,6 @@ def get_size(num_bytes: float, suffix="B") -> str:
         if num_bytes < factor_conversion:
             return f"{num_bytes:.2f}{unidad}{suffix}"
         num_bytes /= factor_conversion
-
-
-def get_total_ram() -> str:
-    """
-    Retorna la ram total
-    :return: str
-    """
-    ram = psutil.virtual_memory()
-    return str(get_size(ram.total))
-
-
-def get_used_ram() -> str:
-    """
-    Retorna la ram usada
-    :return: str
-    """
-    ram = psutil.virtual_memory()
-    return str(get_size(ram.used))
-
-
-def get_free_ram() -> str:
-    """
-    Retorna la ram libre
-    :return: str
-    """
-    ram = psutil.virtual_memory()
-    return str(get_size(ram.available))
-
-
-def print_ram_table() -> None:
-    """
-    Imprime una tabla con la información de la ram
-    :return: None
-    """
-    print_title('RAM INFO')
-    ram_list = [[get_total_ram(), get_used_ram(), get_free_ram()]]
-    head = ('Ram Total', 'Ram usada', 'Ram libre')
-    print(tabulate(ram_list, headers=head, tablefmt='fancy_grid', stralign='center', floatfmt='.0f'))
 
 
 def get_disk_info() -> list:
@@ -230,9 +114,13 @@ def print_disk_table() -> None:
 
 
 if __name__ == '__main__':
-    print_name_ip_table()
-    print_system_table()
-    print_cores_table()
-    print_gpu_info_table()
-    print_ram_table()
+    # print_ip_info()
+    print_system_info()
+    print()
+    print_cpu_info()
+    print()
+    print_gpu_info()
+    print()
+    print_ram_info()
+    print()
     print_disk_table()

@@ -85,7 +85,7 @@ pipenv install pyinstaller
 5) GPU
 6) CPU
 7) Generar reporte PDF
-8) Copiar cualquiuer dato de la aplicación
+8) Copiar cualquier dato de la aplicación
 
 ## Instrucciones de uso
 Esta aplicación de escritorio es un dashboard que imprime en pantalla los datos de especificaciones de la computadora 
@@ -98,7 +98,7 @@ tabla de manera detallada.
 
 
 <p align="center">
-<img src="images/icon.png" alt="psutil"></td>
+<img src="images/icon.png" alt="psutil">
 </p>
 
 
