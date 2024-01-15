@@ -36,7 +36,7 @@ class GpuClass(TitleClass):
         """
 
         title = TitleClass()
-        ifo_list = [
+        info_list = [
             self.get_gpu_id(),
             self.get_gpu_name(),
             self.get_gpu_load(),
@@ -47,4 +47,4 @@ class GpuClass(TitleClass):
         ]
 
         head_tuple = ("id", "nombre", "carga", "memoria libre", "memoria usada", "memora total", "temperatura")
-        title.print_table(title.print_title("INFORMACIÓN DEL GPU"), ifo_list, head_tuple)
+        title.print_table(title.print_title("INFORMACIÓN DEL GPU"), info_list, head_tuple)

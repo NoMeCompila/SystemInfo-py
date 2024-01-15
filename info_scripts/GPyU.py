@@ -1,32 +1,28 @@
-import psutil
-from tabulate import tabulate
 import GPUtil
 import socket
 
 from SpecClass.CpuClass import CpuClass
+from SpecClass.DiskClass import DiskClass
 from SpecClass.GpuClass import GpuClass
 from SpecClass.IpClass import IpClass
 from SpecClass.RamClass import RamClass
 from SpecClass.SystemClass import SystemClass
+from SpecClass.TitleClass import TitleClass
 
 
-def print_title(title: str) -> None:
+def print_pc_title() -> None:
     """
-    Imprime un titulo con un formato especifico
-    :param title:
-    :return: None
+    Imprime un titulo con el nombre de la PC
+    :return:
     """
-    print("=" * 50, title, "=" * 50)
-
-
-def get_pc_name() -> str:
-    """
-    Retorna el nombre del pc
-    :return: str
-    """
-    return str(socket.gethostname())
-
-
+    title = TitleClass()
+    #print(title.get_pc_name())
+    print()
+    print(f"""
+        **************************************************
+        |ESPECIFICACIONES DE LA TERMINAL: {title.get_pc_name()}|
+        ************************************************** 
+    """)
 def print_ip_info() -> None:
     """
     Imprime una tabla con el nombre del pc, la ip privada y la ip publica
@@ -68,53 +64,24 @@ def print_gpu_info() -> None:
     Imprime una tabla con la informacion de la gpu
     :return: None
     """
-
     gpu = GpuClass(GPUtil.getGPUs())
     gpu.print_gpu_info_table()
 
 
-def get_size(num_bytes: float, suffix="B") -> str:
+def print_disk_info() -> None:
     """
-    Retorna el tamaño en bytes, kilobytes, megabytes, gigabytes, terabytes y petabytes
-    :param num_bytes: float
-    :param suffix: str
-    :return: str
-    """
-    factor_conversion = 1024
-    for unidad in ["", "K", "M", "G", "T", "P"]:
-        if num_bytes < factor_conversion:
-            return f"{num_bytes:.2f}{unidad}{suffix}"
-        num_bytes /= factor_conversion
-
-
-def get_disk_info() -> list:
-    """
-    Retorna una lista con la información de los discos
-    :return: list
-    """
-    partitions = psutil.disk_partitions()
-    titles = [
-        [
-            'device: ' + part[1],
-            'total: ' + get_size(psutil.disk_usage(part.mountpoint)[0]),
-            'usado: ' + get_size(psutil.disk_usage(part.mountpoint)[1]),
-            'disponible: ' + get_size(psutil.disk_usage(part.mountpoint)[1])
-        ] for part in partitions
-    ]
-    return titles
-
-
-def print_disk_table() -> None:
-    """
-    Imprime una tabla con la información de los discos
+    Recorre la lista de discos Físicos y enumera sus caracteristicas principales
     :return: None
     """
-    print_title('DISK USAGE')
-    print(tabulate(get_disk_info(), headers=('Device', 'Total', 'Usado', 'disponible'), tablefmt='fancy_grid'))
+    disk = DiskClass()
+    disk.print_disk_table()
 
 
 if __name__ == '__main__':
+    print_pc_title()
+    print()
     # print_ip_info()
+    # print()
     print_system_info()
     print()
     print_cpu_info()
@@ -123,4 +90,4 @@ if __name__ == '__main__':
     print()
     print_ram_info()
     print()
-    print_disk_table()
+    print_disk_info()

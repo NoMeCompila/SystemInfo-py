@@ -46,8 +46,6 @@ class CpuClass:
         """
         title = TitleClass()
 
-        title.print_table(
-            title.print_title("INFORMACIÓN DEL CPU"),
-            [self.get_machine_type(), self.get_processor(), self.get_physical_cores(), self.get_logical_cores()],
-            ("Tipo de Máquina", "Procesador", "Cores físicos", "Cores Lógicos")
-        )
+        info_list = [self.get_machine_type(), self.get_processor(), self.get_physical_cores(), self.get_logical_cores()]
+        head_tuple = ("Tipo de Máquina", "Procesador", "Cores físicos", "Cores Lógicos")
+        title.print_table(title.print_title("INFORMACIÓN DEL CPU"), info_list, head_tuple)

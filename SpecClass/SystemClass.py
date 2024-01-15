@@ -36,11 +36,6 @@ class SystemClass(TitleClass):
         :return: None
         """
         title = TitleClass()
-
-        title.print_table(
-            title.print_title("INFORMACIÓN DEL SISTEMA"),
-            [self.get_os(),
-             self.get_architecture(),
-             self.get_system_version()],
-            ("OS", "Architecture", "Version")
-        )
+        info_list = [self.get_os(), self.get_architecture(), self.get_system_version()]
+        head_tuple = ("OS", "Architecture", "Version")
+        title.print_table(title.print_title("INFORMACIÓN DEL SISTEMA"),info_list, head_tuple)

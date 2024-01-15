@@ -29,7 +29,7 @@ class IpClass(TitleClass):
         :return: None
         """
         title = TitleClass()
-        ifo_list = [self.get_private_ip(), self.get_public_ip()]
+        info_list = [self.get_private_ip(), self.get_public_ip()]
+        head_tuple = ("IP Privada", "IP Pública")
 
-        head_tuple = ("IP Privada","IP Pública")
-        title.print_table(title.print_title("INFORMACIÓN DEL IP"), ifo_list, head_tuple)
+        title.print_table(title.print_title("INFORMACIÓN DEL IP"), info_list, head_tuple)
