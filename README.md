@@ -1,6 +1,6 @@
 <h1>
 <p align="center">
-  PC-SPECS
+  SpecGenius v1.0
 </p>
 </h1>
 
